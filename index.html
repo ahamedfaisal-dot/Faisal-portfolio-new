@@ -1,1014 +1,897 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahamed Faisal A. - AIoT Developer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahamed Faisal A — Electronics × Intelligence</title>
+  <meta name="description"
+    content="Ahamed Faisal A — Electronics and Communication Engineer building intelligent systems across embedded computing, Edge AI, IoT and VLSI. International recognition at IEEE IMS 2026, Nancy, France." />
+  <meta name="author" content="Ahamed Faisal A" />
+  <meta name="theme-color" content="#050505" />
 
-    <style>
-        /* Define CSS variables for theming */
-        :root {
-            --accent-color-static: #14f195;
-            --accent-secondary-static: #00d4ff;
-            --accent-tertiary-static: #9333ea;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-        .theme-dark {
-            --bg-primary: #0a0f1e;
-            --bg-secondary: #12182d;
-            --bg-card: rgba(20, 26, 48, 0.7);
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: rgba(60, 70, 100, 0.6);
-            --accent-color: #14f195;
-            --accent-secondary: #00d4ff;
-            --accent-tertiary: #9333ea;
-            --accent-bg: rgba(20, 241, 149, 0.1);
-            --particle-color: 0x14f195;
-        }
-        
-        .theme-light {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #f1f5f9;
-            --bg-card: rgba(255, 255, 255, 0.7);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --border-color: #e2e8f0;
-            --accent-color: #0d9488;
-            --accent-secondary: #06b6d4;
-            --accent-tertiary: #7c3aed;
-            --accent-bg: rgba(13, 148, 136, 0.1);
-            --particle-color: 0x0d9488;
-        }
 
-        /* Base Body Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            transition: background-color 0.4s ease, color 0.4s ease;
-        }
-        
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        /* Animations */
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 15px var(--accent-color); transform: scale(1); }
-            50% { box-shadow: 0 0 30px var(--accent-color); transform: scale(1.05); }
-        }
-
-        /* Glassmorphism Card Style */
-        .glass-card {
-            background-color: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Enhanced Components */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary), var(--accent-tertiary));
-            background-size: 200% 200%;
-            animation: gradientFlow 4s ease infinite;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .card-hover {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-color);
-        }
-        
-        .project-overlay {
-            background: linear-gradient(135deg, rgba(20, 241, 149, 0.9), rgba(0, 212, 255, 0.9));
-        }
-
-        .floating { animation: float 6s ease-in-out infinite; }
-        
-        .timeline-item::before {
-            content: ''; position: absolute; left: -31px; top: 4px; width: 18px; height: 18px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-            border: 4px solid var(--bg-primary); z-index: 10;
-        }
-        .timeline-item.active::before { animation: pulse 2s infinite; }
-
-        .section-title h2::after {
-            content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 5px; border-radius: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary), var(--accent-tertiary));
-            background-size: 200% 200%; animation: gradientFlow 3s ease infinite;
-        }
-        
-        .nav-link { position: relative; }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: -6px; left: 0;
-            width: 0; height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-            background-size: 200% 200%; transition: all 0.4s ease;
-        }
-        .btn-primary:hover {
-            background-position: 100% 0; transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(20, 241, 149, 0.4);
-        }
-        
-        .btn-secondary {
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            background: transparent;
-            transition: all 0.4s ease;
-        }
-        .btn-secondary:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-primary);
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(20, 241, 149, 0.4);
-        }
-        
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--accent-color), var(--accent-secondary));
-            border-radius: 5px;
-        }
-        
-        .skill-badge {
-            background-color: var(--accent-bg);
-            color: var(--accent-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .skill-badge:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(20, 241, 149, 0.3);
-        }
-        
-        /* Contact Form Styles */
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--accent-color) !important;
-            box-shadow: 0 0 0 3px rgba(20, 241, 149, 0.1) !important;
-        }
-        
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-    </style>
 </head>
-<body class="theme-dark">
-    <canvas id="bg-canvas"></canvas>
-    
-    <header class="sticky top-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center glass-card rounded-b-2xl shadow-lg">
-            <a href="#" class="text-3xl font-black gradient-text">AF.</a>
-            
-            <!-- Desktop Nav -->
-            <div id="desktop-menu" class="hidden md:flex items-center space-x-4 lg:space-x-6">
-                <a href="#about" class="nav-link text-secondary hover:text-primary font-medium">About</a>
-                <a href="#skills" class="nav-link text-secondary hover:text-primary font-medium">Skills</a>
-                <a href="#education" class="nav-link text-secondary hover:text-primary font-medium">Education</a>
-                <a href="#experience" class="nav-link text-secondary hover:text-primary font-medium">Experience</a>
-                <a href="#projects" class="nav-link text-secondary hover:text-primary font-medium">Projects</a>
-                <a href="#extracurricular" class="nav-link text-secondary hover:text-primary font-medium">Activities</a>
-                <a href="#achievements" class="nav-link text-secondary hover:text-primary font-medium">Achievements</a>
-                <a href="#contact" class="nav-link text-secondary hover:text-primary font-medium">Contact</a>
-            </div>
 
-            <div class="flex items-center space-x-4">
-                <button id="theme-toggle" aria-label="Toggle theme" class="p-3 rounded-full transition-all hover:scale-110" style="background-color: var(--bg-secondary);">
-                    <i class="fas fa-sun text-yellow-400 text-xl"></i>
-                </button>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden p-3 rounded-full" aria-label="Open mobile menu" style="background-color: var(--bg-secondary);">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor">
+    <span class="cursor-text" id="cursorText">VIEW</span>
+  </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 hidden flex-col items-center justify-center space-y-8 text-2xl font-bold glass-card">
-        <button id="mobile-menu-close" class="absolute top-8 right-8 text-4xl">&times;</button>
-        <a href="#about" class="nav-link mobile-nav-link">About</a>
-        <a href="#skills" class="nav-link mobile-nav-link">Skills</a>
-        <a href="#education" class="nav-link mobile-nav-link">Education</a>
-        <a href="#experience" class="nav-link mobile-nav-link">Experience</a>
-        <a href="#projects" class="nav-link mobile-nav-link">Projects</a>
-        <a href="#extracurricular" class="nav-link mobile-nav-link">Activities</a>
-        <a href="#achievements" class="nav-link mobile-nav-link">Achievements</a>
-        <a href="#contact" class="nav-link mobile-nav-link">Contact</a>
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" data-cursor="link">AF.</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-cursor="link">ABOUT</a>
+        <a href="#projects" data-cursor="link">PROJECTS</a>
+        <a href="#experience" data-cursor="link">EXPERIENCE</a>
+        <a href="#achievements" data-cursor="link">ACHIEVEMENTS</a>
+        <a href="#contact" data-cursor="link">CONTACT</a>
+        <a href="#" class="nav-resume" data-cursor="link">RESUME</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="#about" class="mobile-menu-link">ABOUT</a>
+      <a href="#projects" class="mobile-menu-link">PROJECTS</a>
+      <a href="#experience" class="mobile-menu-link">EXPERIENCE</a>
+      <a href="#achievements" class="mobile-menu-link">ACHIEVEMENTS</a>
+      <a href="#contact" class="mobile-menu-link">CONTACT</a>
+      <a href="#" class="mobile-menu-link">RESUME</a>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-video-wrap">
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="/profile.jpg">
+        <source src="/main hero background video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
     </div>
 
-    <main class="container mx-auto px-6 pt-24 pb-12">
-        <section id="about" class="mb-32 min-h-[80vh] flex items-center">
-            <div class="grid lg:grid-cols-5 gap-16 items-center w-full">
-                <div class="lg:col-span-3 space-y-6">
-                    <h1 class="text-6xl md:text-7xl font-black reveal-fade">I'm <span class="gradient-text">Ahamed Faisal A.</span></h1>
-                    <h2 class="text-3xl md:text-4xl font-bold reveal-fade" style="color: var(--accent-color);">AIoT Developer & Innovator</h2>
-                    <p class="text-secondary text-lg leading-relaxed reveal-fade">
-                        Electronics and Communication Engineering enthusiast with a strong foundation in C, C++, and a passion for IoT solutions, machine learning, and communication systems. Skilled in developing hardware prototypes and web-based platforms, with experience that highlights innovation and problem-solving.
-                    </p>
-                    <div class="flex flex-wrap items-center gap-6 reveal-fade pt-4">
-                        <a href="#contact" class="btn-primary px-8 py-4 font-bold text-white rounded-xl text-lg">Get In Touch</a>
-                        <a href="resume/Ahamed Faisal resume.pdf" download="Ahamed_Faisal_Resume.pdf" class="btn-secondary px-8 py-4 font-bold rounded-xl text-lg border-2 transition-all hover:scale-105" style="border-color: var(--accent-color); color: var(--accent-color); background: transparent;">
-                            <i class="fas fa-download mr-2"></i>Download Resume
-                        </a>
-                        <div class="flex items-center gap-4">
-                            <a href="https://github.com/ahamedfaisal-dot" class="text-4xl transition-all hover:scale-125 hover:text-[color:var(--accent-color)]"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/ahamed-faisal-57a069294/" class="text-4xl transition-all hover:scale-125 hover:text-[color:var(--accent-secondary)]"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-2 flex justify-center items-center reveal-fade">
-                    <div class="relative w-80 h-80 floating">
-                        <div class="absolute inset-0 rounded-full border-4" style="border-color: var(--accent-color); animation: pulse 4s ease-in-out infinite;"></div>
-                        <img src="pics/profile.jpg" alt="Profile picture of Ahamed Faisal" class="w-full h-full object-cover rounded-full p-2 transition-all hover:scale-105" style="background-color: var(--bg-secondary);">
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="hero-content">
+      <div class="hero-title-wrap">
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-1" data-animate="hero">AHAMED</span>
+          <span class="hero-line hero-line-2" data-animate="hero">FAISAL A.</span>
+        </h1>
+      </div>
+      <div class="hero-subtitle" data-animate="hero-sub">
+        <span class="hero-separator">ELECTRONICS</span>
+        <span class="hero-x">×</span>
+        <span class="hero-separator">INTELLIGENCE</span>
+      </div>
+      <p class="hero-tags" data-animate="hero-tags">Embedded Systems · Edge AI · IoT · VLSI</p>
+      <p class="hero-desc" data-animate="hero-desc">I build intelligent systems that connect sensing, computation and
+        the physical world.</p>
+      <div class="hero-cta" data-animate="hero-cta">
+        <a href="#projects" class="btn btn-solid" data-cursor="link">VIEW PROJECTS</a>
+        <a href="#about" class="btn btn-outline" data-cursor="link">EXPLORE MY STORY</a>
+      </div>
+    </div>
 
-        <section id="skills" class="py-20">
-            <div class="glass-card rounded-2xl shadow-2xl p-8 md:p-12 reveal-up">
-                <div class="section-title text-center mb-16">
-                    <h2 class="text-5xl font-black gradient-text relative">My Tech Stack</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                    <!-- Programming -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-code text-3xl" style="color: var(--accent-color);"></i><h3 class="font-bold text-2xl">Programming</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">C</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">C++</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Python</span>
-                        </div>
-                    </div>
-                    <!-- IoT & Hardware -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-microchip text-3xl" style="color: var(--accent-secondary);"></i><h3 class="font-bold text-2xl">IoT & Hardware</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">ESP32</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Raspberry Pi</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Arduino</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">PCB Design</span>
-                        </div>
-                    </div>
-                    <!-- Web Development -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-globe text-3xl" style="color: var(--accent-tertiary);"></i><h3 class="font-bold text-2xl">Web Development</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">HTML</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">CSS</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">SQL</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Flask</span>
-                        </div>
-                    </div>
-                    <!-- Cloud Platforms -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-cloud text-3xl" style="color: var(--accent-color);"></i><h3 class="font-bold text-2xl">Cloud Platforms</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Google Firebase</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Blynk IoT</span>
-                        </div>
-                    </div>
-                    <!-- Domains -->
-                     <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-brain text-3xl" style="color: var(--accent-secondary);"></i><h3 class="font-bold text-2xl">Domains</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Machine Learning</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Deep Learning</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Embedded Systems</span>
-                        </div>
-                    </div>
-                    <!-- Tools & Software -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4"><i class="fas fa-tools text-3xl" style="color: var(--accent-tertiary);"></i><h3 class="font-bold text-2xl">Tools & Software</h3></div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">VS Code</span>
-                             <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Git</span>
-                             <span class="skill-badge px-4 py-2 rounded-lg font-semibold">n8n</span>
-                             <span class="skill-badge px-4 py-2 rounded-lg font-semibold">workato</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">LTspice</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Proteus</span>
-                             <span class="skill-badge px-4 py-2 rounded-lg font-semibold">Fusion 360</span>
-                            <span class="skill-badge px-4 py-2 rounded-lg font-semibold">TinkerCAD</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="hero-scroll" data-animate="hero-scroll">
+      <span class="hero-scroll-text">SCROLL TO EXPLORE</span>
+      <div class="hero-scroll-line"></div>
+    </div>
 
-        <section id="education" class="py-20">
-            <div class="section-title mb-16 text-center">
-                <h2 class="text-5xl font-black gradient-text relative">Education</h2>
-            </div>
-            <div class="relative pl-8 border-l-2 max-w-4xl mx-auto" style="border-color: var(--border-color);">
-                <!-- Education Item 1 -->
-                <div class="mb-12 relative timeline-item reveal-up">
-                    <div class="p-8 rounded-2xl glass-card">
-                        <p class="text-sm text-secondary mb-2">2023 — Present</p>
-                        <h3 class="font-black text-2xl mb-2">Rajalakshmi Engineering College</h3>
-                        <p class="text-xl font-bold mb-3" style="color: var(--accent-tertiary);">B.E. in Electronics & Communication</p>
-                        <p class="text-secondary">Currently pursuing my undergraduate degree with a CGPA of 8.76. Active as IoT lead of Intellexa Club and a core member of IEEE.</p>
-                    </div>
-                </div>
-                <!-- Education Item 2 -->
-                <div class="relative timeline-item reveal-up">
-                    <div class="p-8 rounded-2xl glass-card">
-                        <p class="text-sm text-secondary mb-2">2011 — 2023</p>
-                        <h3 class="font-black text-2xl mb-2">Sairam Matriculation Higher Secondary School</h3>
-                        <p class="text-xl font-bold mb-3" style="color: var(--accent-color);">HSC & SSLC</p>
-                        <p class="text-secondary">Completed Higher Secondary with 88.33% and Secondary schooling with all passes. Active in Yoga, NCC, Hockey, Football, and Chess.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="experience" class="py-20">
-            <div class="section-title mb-16 text-center">
-                <h2 class="text-5xl font-black gradient-text relative">Work Experience</h2>
-            </div>
-            <div class="relative pl-8 border-l-2 max-w-4xl mx-auto" style="border-color: var(--border-color);">
-                <!-- Experience Item 1 -->
-                <div class="mb-12 relative timeline-item reveal-up">
-                    <div class="p-8 rounded-2xl glass-card">
-                        <p class="text-sm text-secondary mb-2">Jun 2024 — Jul 2024</p>
-                        <h3 class="font-black text-2xl mb-2">Airports Authority of India (AAI)</h3>
-                        <p class="text-xl font-bold mb-3" style="color: var(--accent-color);">Airport Operations Intern</p>
-                        <p class="text-secondary">Gained exposure to CNS systems (VHF, DVOR, RADAR) and Air Traffic Services, learning about aviation safety and communication.</p>
-                    </div>
-                </div>
-                <!-- Experience Item 2 -->
-                <div class="relative timeline-item reveal-up">
-                    <div class="p-8 rounded-2xl glass-card">
-                        <p class="text-sm text-secondary mb-2">Jan 2025</p>
-                        <h3 class="font-black text-2xl mb-2">Nippon Paints Pvt. Ltd.</h3>
-                        <p class="text-xl font-bold mb-3" style="color: var(--accent-secondary);">Industrial Automation Intern</p>
-                        <p class="text-secondary">Worked with PLC, SCADA, and IoT-based monitoring systems for industrial automation and power management.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="hero-status" data-animate="hero-status">
+      <span>ECE · 2027</span>
+      <span>CHENNAI, INDIA</span>
+    </div>
+  </section>
 
-        <section id="projects" class="py-20">
-            <div class="section-title text-center mb-16">
-                <h2 class="text-5xl font-black gradient-text relative">Featured Projects</h2>
-            </div>
-            <p class="text-secondary mb-16 text-center text-lg max-w-3xl mx-auto">Innovative solutions showcasing my expertise in IoT, software development, and hardware integration.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Project Cards -->
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/resq.jpg" alt="ResQSense" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://www.linkedin.com/posts/ahamed-faisal-57a069294_sleepless-nights-relentless-hard-work-activity-7366813910278033409-lgxe?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEczJe4BcqpESfDgZrvjd3WyiAPoM4-YcMA" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on LinkedIn">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4 gradient-text">ResQSense</h3>
-                        <p class="text-secondary text-lg">IoT for hazard prediction in underground mining.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/s2s.jpg" alt="Soil to Sprout" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://www.linkedin.com/posts/ahamed-faisal-57a069294_teamwork-innovation-iot-activity-7366654180905656323-BG_Y?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEczJe4BcqpESfDgZrvjd3WyiAPoM4-YcMA" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on LinkedIn">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-secondary)">Soil to Sprout</h3>
-                        <p class="text-secondary text-lg">Smart AgriTech rover for automating farm activities.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/smart_extension_box.jpg" alt="Smart Extension Box" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://www.linkedin.com/posts/ahamed-faisal-57a069294_iot-smarttech-energyefficiency-activity-7292899166920355840-nRNq?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEczJe4BcqpESfDgZrvjd3WyiAPoM4-YcMA" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on LinkedIn">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-tertiary)">Smart Extension Box</h3>
-                        <p class="text-secondary text-lg">Efficient power management with advanced safety.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/soh.jpg" alt="SOH Ridder" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="#" class="text-white text-4xl hover:scale-125 transition-transform">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="#" class="text-white text-4xl hover:scale-125 transition-transform">
-                                        <i class="fas fa-link"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4 gradient-text">SOH Ridder</h3>
-                        <p class="text-secondary text-lg">AIoT powered device to monitor EV vehicle battery and provide optimized route.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/workchainx.png" alt="WorkChain X" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://workato-o1qb.onrender.com/" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="Live Demo">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-secondary)">WorkChain X</h3>
-                        <p class="text-secondary text-lg">Solving 10 problems in manufacturing industry using no-code platform (Workato). Got top 10 in Workato AI hackathon.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/smart_energymeter.jpg" alt="Smart Energy Meter" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://drive.google.com/file/d/11tHPk1P0kOKUYgiXLLjEohLBft9j8pEG/view" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View Project Details">
-                                        <i class="fab fa-google-drive"></i>
-                                    </a>
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-tertiary)">Smart Energy Meter</h3>
-                        <p class="text-secondary text-lg">Real-time energy monitoring for efficiency.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="https://placehold.co/600x400/0a0f1e/14f195?text=Med+Link" alt="Med Link" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6"><h4 class="text-white font-black text-2xl">View Project</h4><div class="flex space-x-6 justify-center"><a href="#" class="text-white text-4xl hover:scale-125 transition-transform"><i class="fab fa-github"></i></a></div></div>
-                        </div>
-                    </div>
-                    <div class="p-8"><h3 class="font-black text-2xl mb-4 gradient-text">Med Link</h3><p class="text-secondary text-lg">Healthcare tech connecting patients & providers.</p></div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/heart_mri_classification.png" alt="Heart MRI Classification" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4 gradient-text">Heart MRI Classification</h3>
-                        <p class="text-secondary text-lg">CNN-based deep learning model for medical image analysis.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/releaf.png" alt="Releaf" class="w-full h-64 object-cover">
-                        <div class="project-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                            <div class="text-center space-y-6">
-                                <h4 class="text-white font-black text-2xl">View Project</h4>
-                                <div class="flex space-x-6 justify-center">
-                                    <a href="https://irrivance.netlify.app/" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="Live Demo">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                    <a href="https://github.com/ahamedfaisal-dot" target="_blank" class="text-white text-4xl hover:scale-125 transition-transform" title="View on GitHub">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-secondary)">Releaf</h3>
-                        <p class="text-secondary text-lg">Environmental project leveraging IoT for sustainability.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- ========== ABOUT ========== -->
+  <section class="section about" id="about">
+    <div class="section-number" aria-hidden="true">01</div>
+    <div class="about-grid">
+      <div class="about-left">
+        <h2 class="section-heading reveal-text">
+          <span>ENGINEERING</span>
+          <span>BEYOND</span>
+          <span>THE SCREEN.</span>
+        </h2>
+        <div class="about-text reveal-up">
+          <p>I am Ahamed Faisal A, an Electronics and Communication Engineering student focused on building intelligent
+            systems that combine electronics, embedded computing and artificial intelligence.</p>
+          <p>My work spans embedded systems, IoT, Edge AI, PCB design, communication technologies and VLSI. I focus on
+            solving real-world engineering problems through systems that can sense, process, communicate and act.</p>
+        </div>
+        <div class="about-stats reveal-up">
+          <div class="stat">
+            <span class="stat-value">Final Year</span>
+            <span class="stat-label">ECE</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">8.604</span>
+            <span class="stat-label">CGPA</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">2×</span>
+            <span class="stat-label">International Recognition</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">Multiple</span>
+            <span class="stat-label">National Hackathon Wins</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-right reveal-up">
+        <div class="about-image-wrap" data-cursor="img">
+          <img src="/profile.jpg" alt="Ahamed Faisal A — Portrait" class="about-image" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section id="extracurricular" class="py-20">
-            <div class="section-title text-center mb-16">
-                <h2 class="text-5xl font-black gradient-text relative">Extracurricular Activities</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <img src="pics/iot_lead.JPG" alt="Intellexa Club" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4 gradient-text">IoT Lead, Intellexa Club</h3>
-                        <p class="text-secondary text-lg">Leading workshops and mentoring students on IoT projects.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <img src="pics/ieee_core.jpg" alt="IEEE Student Branch" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-secondary)">Vice chairman, IEEE SB REC</h3>
-                        <p class="text-secondary text-lg">Contributing to technical events, seminars, and projects.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <img src="pics/hockey_team.jpg" alt="Hockey Team" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="font-black text-2xl mb-4" style="color:var(--accent-tertiary)">College Hockey Team</h3>
-                        <p class="text-secondary text-lg">Dedicated member and zonal tournament runner-up.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- ========== SKILLS ========== -->
+  <section class="section skills" id="skills">
+    <div class="section-number" aria-hidden="true">02</div>
+    <div class="section-header">
+      <h2 class="section-heading reveal-text">
+        <span>TECHNICAL</span>
+        <span>INDEX.</span>
+      </h2>
+    </div>
 
-        <section id="achievements" class="py-20">
-            <div class="section-title text-center mb-16">
-                <h2 class="text-5xl font-black gradient-text relative">Technical Achievements</h2>
-            </div>
-             <p class="text-secondary mb-16 text-center text-lg max-w-3xl mx-auto">Notable achievements showcasing technical excellence </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Achievements Cards -->
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/ieee_yesist12_runner.jpg" alt="IEEE YESIST12" class="w-full h-64 object-cover">
-                         <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #ffd700, #ffc400);"><i class="fas fa-trophy mr-1"></i>Runner-Up</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2 gradient-text">IEEE YESIST12 International</h3>
-                        <p class="text-secondary text-base">Recognized for ResQSense project in Malaysia, awarded 250USD.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/cmr_thinkfest_2.0.jpg" alt="CMR ThinkFeast" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #c0c0c0, #e8e8e8);"><i class="fas fa-medal mr-1"></i>Top 6</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-secondary)">CMR ThinkFeast 2.0</h3>
-                        <p class="text-secondary text-base">Top 6 finalist out of 121 teams for the 'Soil to Sprout' project.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/botsha.jpg" alt="BOTSHA Symposium" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #cd7f32, #e8a57c);"><i class="fas fa-award mr-1"></i>2nd Place</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-tertiary)">BOTSHA National Symposium</h3>
-                        <p class="text-secondary text-base">Best Paper on ResQSense, awarded ₹2000.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/core_skill_contest.jpg" alt="Core Skill Contest" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #cd7f32, #e8a57c);"><i class="fas fa-award mr-1"></i>2nd Place</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2 gradient-text">Core Skill Contest</h3>
-                        <p class="text-secondary text-base">At Rajalakshmi Engineering College, awarded ₹3000.</p>
-                    </div>
-                </div>
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/iquest_3rdplace.jpg" alt="iQuest Competition" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #a0522d, #d2691e);"><i class="fas fa-award mr-1"></i>3rd Place</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-secondary)">iQuest Competition</h3>
-                        <p class="text-secondary text-base">For Smart Extension Box project, awarded ₹1000.</p>
-                    </div>
-                </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">PROGRAMMING HDL</h3>
+        <div class="skill-list">
+          <span>C</span><span>Python</span><span>Verilog</span>
+        </div>
+      </div>
 
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/sih internal round.jpg" alt="Smart India Hackathon" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #14f195, #00d4ff);"><i class="fas fa-star mr-1"></i>Top 50</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2 gradient-text">SIH Internal Hackathon</h3>
-                        <p class="text-secondary text-base">Selected among top 50 teams in Smart India Hackathon internal rounds.</p>
-                    </div>
-                </div>
-                 <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/peri paper presentatin.png" alt="BOTSHA Symposium" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #cd7f32, #e8a57c);"><i class="fas fa-award mr-1"></i>2nd Place</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-tertiary)">SEMICONIX National Symposium</h3>
-                        <p class="text-secondary text-base">Best Paper on ResQSense, awarded ₹500.</p>
-                    </div>
-                    
-                </div>
-                 <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/dreamovation.png" alt="BOTSHA Symposium" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #cd7f32, #e8a57c);"><i class="fas fa-award mr-1"></i>2nd Place</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-tertiary)">DREAMOVATION - business pitching event</h3>
-                        <p class="text-secondary text-base">Got runner up with cash prize of ₹7000 for our business idea </p>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">VLSI DIGITAL DESIGN</h3>
+        <div class="skill-list">
+          <span>Digital Electronics</span><span>RTL Design</span><span>VLSI Fundamentals</span>
+        </div>
+      </div>
 
-             <section id="non-technical" class="py-20">
-            <div class="section-title text-center mb-16">
-                <h2 class="text-5xl font-black gradient-text relative">Non-Technical Achievements</h2>
-                
-            </div>
-            <p class="text-secondary mb-16 text-center text-lg max-w-3xl mx-auto">Highlights of extracurricular and non-technical accomplishments.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <div class="card-hover rounded-2xl overflow-hidden shadow-2xl reveal-up">
-                    <div class="relative group">
-                        <img src="pics/hockey_zonals_runner.jpg" alt="Hockey Tournament" class="w-full h-64 object-cover">
-                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full font-black text-white text-sm" style="background: linear-gradient(135deg, #ffd700, #ffc400);"><i class="fas fa-trophy mr-1"></i>Runner-Up</div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-black text-xl mb-2" style="color:var(--accent-tertiary)">Anna University Zonal Hockey</h3>
-                        <p class="text-secondary text-base">Secured runner-up position in 2023 and 2024.</p>
-                    </div>
-                </div>
-                <!-- add more non-technical cards here if needed -->
-            </div>
-        </section>
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">EMBEDDED SYSTEMS</h3>
+        <div class="skill-list">
+          <span>ESP32</span><span>Raspberry Pi</span><span>Arduino Uno</span><span>Sensor
+            Interfacing</span><span>Hardware-Software Integration</span>
+        </div>
+      </div>
 
-        <section id="contact" class="py-20 text-center">
-            <div class="glass-card max-w-4xl mx-auto rounded-2xl shadow-2xl p-8 md:p-16 reveal-up">
-                <div class="section-title mb-8">
-                    <h2 class="text-5xl font-black gradient-text relative">Let's Connect</h2>
-                </div>
-                <p class="text-secondary mb-12 text-lg max-w-2xl mx-auto">I'm currently seeking new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-                
-                <!-- Contact Form -->
-                <form action="https://formspree.io/f/xlddbqvn" method="POST" class="contact-form max-w-2xl mx-auto space-y-6 mb-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="text-left">
-                            <label for="name" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Name</label>
-                            <input type="text" id="name" name="name" required 
-                                   class="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2"
-                                   style="background-color: var(--bg-secondary); border-color: var(--border-color); color: var(--text-primary);"
-                                   placeholder="Your Name">
-                        </div>
-                        <div class="text-left">
-                            <label for="email" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Email</label>
-                            <input type="email" id="email" name="email" required 
-                                   class="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2"
-                                   style="background-color: var(--bg-secondary); border-color: var(--border-color); color: var(--text-primary);"
-                                   placeholder="your.email@example.com">
-                        </div>
-                    </div>
-                    <div class="text-left">
-                        <label for="message" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Message</label>
-                        <textarea id="message" name="message" rows="5" required 
-                                  class="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 resize-vertical"
-                                  style="background-color: var(--bg-secondary); border-color: var(--border-color); color: var(--text-primary);"
-                                  placeholder="Your Message"></textarea>
-                    </div>
-                    <button type="submit" class="w-full py-4 px-8 rounded-lg font-black text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl" 
-                            style="background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary)); color: white;">
-                        Send Message
-                    </button>
-                </form>
-                
-                <!-- Success/Error Messages -->
-                <div id="form-messages" class="mb-8"></div>
-                
-                <!-- Alternative Contact -->
-                <p class="text-secondary mb-6">Or reach me directly at:</p>
-                <a href="mailto:faisal.offl123@gmail.com" class="text-lg font-semibold hover:underline" style="color: var(--accent-color);">
-                    faisal.offl123@gmail.com
-                </a>
-                
-                <div class="flex justify-center items-center space-x-10 mt-12">
-                    <a href="https://github.com/ahamedfaisal-dot" class="text-5xl transition-all hover:scale-125" style="color: var(--accent-color);"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/ahamed-faisal-57a069294/" class="text-5xl transition-all hover:scale-125" style="color: var(--accent-secondary);"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">HARDWARE PCB DESIGN</h3>
+        <div class="skill-list">
+          <span>PCB Design</span><span>Circuit Design</span><span>Hardware Prototyping</span>
+        </div>
+      </div>
 
-    <footer class="text-center py-8 border-t" style="border-color: var(--border-color);">
-        <p class="text-secondary font-medium">Designed & Built by Ahamed Faisal A. &copy; 2025</p>
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">MACHINE LEARNING</h3>
+        <div class="skill-list">
+          <span>Scikit-learn</span><span>TensorFlow</span><span>OpenCV</span><span>NumPy</span><span>Pandas</span><span>Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">TOOLS SOFTWARE</h3>
+        <div class="skill-list">
+          <span>KiCad</span><span>LTspice</span><span>Xilinx (Basic)</span><span>Git</span><span>GitHub</span><span>VS
+            Code</span><span>Arduino IDE</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal-up">
+        <h3 class="skill-category">OPERATING SYSTEMS</h3>
+        <div class="skill-list">
+          <span>Windows</span><span>Linux (Basic)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SELECTED WORK ========== -->
+  <section class="section projects" id="projects">
+    <div class="section-number" aria-hidden="true">03</div>
+    <div class="projects-header">
+      <h2 class="section-heading reveal-text">
+        <span>SELECTED</span>
+        <span>ENGINEERING</span>
+        <span>WORK.</span>
+      </h2>
+    </div>
+
+    <!-- PROJECT 01 — ATLAS -->
+    <article class="project project-full" id="project-atlas">
+      <div class="project-chapter">01</div>
+      <div class="project-layout project-layout-right">
+        <div class="project-image-wrap reveal-up" data-cursor="img">
+          <img src="pics/i2mtc france project.png" alt="ATLAS — IEEE IMS 2026 Nancy France" class="project-image"
+            loading="lazy" />
+        </div>
+        <div class="project-info">
+          <span class="project-label reveal-up">FLAGSHIP PROJECT</span>
+          <h3 class="project-title reveal-text"><span>ATLAS</span></h3>
+          <p class="project-subtitle reveal-up">Autonomous Telemetry and Localization Architecture for Subterranean
+            Systems</p>
+          <div class="project-highlight reveal-up">
+            <span class="highlight-badge">3RD PLACE</span>
+            <span class="highlight-event">IEEE IMS International Student Project Contest 2026 — Nancy, France</span>
+          </div>
+          <div class="project-tags reveal-up">
+            <span>International Finalist</span>
+            <span>Subterranean Localization</span>
+            <span>Telemetry</span>
+            <span>Embedded Systems</span>
+            <span>Communication</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 02 — RESQSENSE -->
+    <article class="project project-full" id="project-resqsense">
+      <div class="project-chapter">02</div>
+      <div class="project-layout project-layout-left">
+        <div class="project-info">
+          <span class="project-label reveal-up">AIoT SAFETY SYSTEM</span>
+          <h3 class="project-title reveal-text"><span>RESQSENSE</span></h3>
+          <p class="project-subtitle reveal-up">AIoT-Based Underground Mine Safety System</p>
+          <p class="project-desc reveal-up">A three-layer AIoT safety architecture combining stationary sensing nodes,
+            wearable systems and an autonomous rover for predictive underground hazard monitoring.</p>
+          <div class="project-metrics reveal-up">
+            <div class="metric">
+              <span class="metric-value">89%</span>
+              <span class="metric-label">Accuracy</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">88%</span>
+              <span class="metric-label">Precision</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">87%</span>
+              <span class="metric-label">Recall</span>
+            </div>
+          </div>
+          <div class="project-highlight reveal-up">
+            <span class="highlight-badge">INTERNATIONAL RUNNER-UP</span>
+            <span class="highlight-event">IEEE YESIST12 2025 — Malaysia</span>
+          </div>
+          <div class="project-tags reveal-up">
+            <span>IoT</span>
+            <span>Machine Learning</span>
+            <span>LoRa</span>
+            <span>PLC</span>
+            <span>ESP32</span>
+            <span>Flask</span>
+          </div>
+        </div>
+        <div class="project-image-wrap reveal-up" data-cursor="img">
+          <img src="/resq.jpg" alt="RESQSENSE — AIoT Mine Safety" class="project-image" loading="lazy" />
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 03 — LIFE TRACE -->
+    <article class="project project-full project-dark" id="project-lifetrace">
+      <div class="project-chapter">03</div>
+      <div class="project-layout project-layout-right">
+        <div class="project-image-wrap reveal-up" data-cursor="img">
+          <img src="/lifetrace.png" alt="LIFE TRACE — Edge AI Disaster-Response Human Detection" class="project-image"
+            loading="lazy" />
+        </div>
+        <div class="project-info">
+          <span class="project-label reveal-up">EDGE AI DISASTER RESPONSE</span>
+          <h3 class="project-title reveal-text"><span>LIFE TRACE</span></h3>
+          <p class="project-subtitle reveal-up">Edge AI Disaster-Response Human Detection System</p>
+          <p class="project-desc reveal-up">An Edge AI disaster-response system designed to detect trapped humans using
+            thermal vision, microwave radar and multimodal sensor fusion.</p>
+          <div class="project-metrics reveal-up">
+            <div class="metric metric-highlight">
+              <span class="metric-value">10 FPS</span>
+              <span class="metric-label">Edge Inference</span>
+            </div>
+          </div>
+          <div class="project-tags reveal-up">
+            <span>Raspberry Pi</span>
+            <span>ONNX Runtime</span>
+            <span>Thermal Vision</span>
+            <span>Microwave Radar</span>
+            <span>Bayesian Fusion</span>
+            <span>Kalman Filtering</span>
+            <span>FFT</span>
+            <span>CNN</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 04 — SOIL TO SPROUT -->
+    <article class="project project-full" id="project-s2s">
+      <div class="project-chapter">04</div>
+      <div class="project-layout project-layout-left">
+        <div class="project-info">
+          <span class="project-label reveal-up">AUTONOMOUS AGRICULTURE</span>
+          <h3 class="project-title reveal-text"><span>SOIL TO SPROUT</span></h3>
+          <p class="project-subtitle reveal-up">Autonomous Smart Agricultural Rover</p>
+          <div class="project-highlight reveal-up">
+            <span class="highlight-badge">3RD PLACE</span>
+            <span class="highlight-event">AMPATHON 2026</span>
+          </div>
+          <div class="project-tags reveal-up">
+            <span>Raspberry Pi</span>
+            <span>ESP32</span>
+            <span>LoRa</span>
+            <span>Edge AI</span>
+            <span>Computer Vision</span>
+          </div>
+        </div>
+        <div class="project-image-wrap reveal-up" data-cursor="img">
+          <img src="/s2s.jpg" alt="Soil to Sprout — Autonomous Agricultural Rover" class="project-image"
+            loading="lazy" />
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 05 — OFFLINE AI KNOWLEDGE GATEWAY -->
+    <article class="project project-full" id="project-aigateway">
+      <div class="project-chapter">05</div>
+      <div class="project-layout project-layout-right">
+        <div class="project-image-wrap reveal-up" data-cursor="img">
+          <img src="pics/sms gateay.png" alt="Offline AI Knowledge Gateway — Vortex 2.0 Winner" class="project-image"
+            loading="lazy" />
+        </div>
+        <div class="project-info">
+          <span class="project-label reveal-up">DISTRIBUTED AI PIPELINE</span>
+          <h3 class="project-title project-title-lg reveal-text">
+            <span>OFFLINE AI</span>
+            <span>KNOWLEDGE GATEWAY</span>
+          </h3>
+          <p class="project-desc reveal-up">A distributed AI pipeline designed to make millions of Wikipedia articles
+            accessible through basic SMS communication without requiring internet access.</p>
+          <div class="project-metrics reveal-up">
+            <div class="metric">
+              <span class="metric-value">2.8M</span>
+              <span class="metric-label">Articles</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">30GB+</span>
+              <span class="metric-label">Knowledge Base</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">&lt;5 SEC</span>
+              <span class="metric-label">Response Pipeline</span>
+            </div>
+          </div>
+          <div class="project-highlight reveal-up">
+            <span class="highlight-badge">1ST PLACE</span>
+            <span class="highlight-event">VORTEX 2.0</span>
+          </div>
+          <div class="project-tags reveal-up">
+            <span>BM25</span>
+            <span>FAISS</span>
+            <span>MiniLM</span>
+            <span>RRF</span>
+            <span>RoBERTa</span>
+            <span>T5</span>
+            <span>Flutter</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== OTHER PROJECTS ===== -->
+    <div class="projects-other">
+      <h3 class="projects-other-title reveal-up">More Engineering Work</h3>
+      <div class="projects-grid">
+
+        <article class="project-card reveal-up" data-cursor="link">
+          <span class="project-card-num">06</span>
+          <div class="project-card-img-wrap">
+            <img src="/smart_energymeter.jpg" alt="Smart Energy Meter" class="project-card-img" loading="lazy" />
+          </div>
+          <div class="project-card-info">
+            <h4 class="project-card-title">Smart Energy Meter</h4>
+            <p class="project-card-desc">IoT-based real-time energy monitoring and analytics system.</p>
+            <div class="project-card-tags">
+              <span>IoT</span><span>ESP32</span><span>Cloud</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal-up" data-cursor="link">
+          <span class="project-card-num">07</span>
+          <div class="project-card-img-wrap">
+            <img src="/smart_extension_box.jpg" alt="Smart Extension Box" class="project-card-img" loading="lazy" />
+          </div>
+          <div class="project-card-info">
+            <h4 class="project-card-title">Smart Extension Box</h4>
+            <p class="project-card-desc">Intelligent power distribution with remote monitoring and control.</p>
+            <div class="project-card-tags">
+              <span>Embedded</span><span>IoT</span><span>Power</span>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="project-card reveal-up" data-cursor="link">
+          <span class="project-card-num">09</span>
+          <div class="project-card-img-wrap">
+            <img src="pics/edgeaipi.png" alt="Edge AI Road Anomaly Detection" class="project-card-img" loading="lazy" />
+          </div>
+          <div class="project-card-info">
+            <h4 class="project-card-title">Edge AI Road Anomaly Detection</h4>
+            <p class="project-card-desc">Real-time road surface anomaly detection using edge computing and computer
+              vision.</p>
+            <div class="project-card-tags">
+              <span>Edge AI</span><span>Computer Vision</span><span>Embedded</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal-up" data-cursor="link">
+          <span class="project-card-num">10</span>
+          <div class="project-card-img-wrap">
+            <img src="pics/safereach.png" alt="SafeReach" class="project-card-img" loading="lazy" />
+          </div>
+          <div class="project-card-info">
+            <h4 class="project-card-title">SafeReach</h4>
+            <p class="project-card-desc">Emergency communication and response coordination system.</p>
+            <div class="project-card-tags">
+              <span>IoT</span><span>Communication</span><span>Safety</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal-up" data-cursor="link">
+          <span class="project-card-num">11</span>
+          <div class="project-card-img-wrap">
+            <img src="pics/kmrl.png" alt="M-RAIL OPS" class="project-card-img" loading="lazy" />
+          </div>
+          <div class="project-card-info">
+            <h4 class="project-card-title">M-RAIL OPS</h4>
+            <p class="project-card-desc">Railway operations monitoring and management system.</p>
+            <div class="project-card-tags">
+              <span>IoT</span><span>Explainable AI</span><span>Automation</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXPERIENCE ========== -->
+  <section class="section experience" id="experience">
+    <div class="section-number" aria-hidden="true">04</div>
+    <div class="section-header">
+      <h2 class="section-heading reveal-text">
+        <span>WHERE I'VE</span>
+        <span>WORKED.</span>
+      </h2>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item reveal-up">
+        <div class="timeline-layout">
+          <div class="timeline-image-col">
+            <div class="timeline-img-wrap" data-cursor="img">
+              <img src="/nippon intern.png" alt="Nippon Paints — Industrial Automation Intern" class="timeline-img"
+                loading="lazy" />
+            </div>
+          </div>
+          <div class="timeline-info-col">
+            <span class="timeline-num">01</span>
+            <h3 class="timeline-title">NIPPON PAINTS</h3>
+            <span class="timeline-role">Industrial Automation Intern</span>
+            <span class="timeline-date">January 2025</span>
+            <p class="timeline-desc">
+              Engineered SCADA interfaces and programmed PLCs for manufacturing automation. Monitored power management
+              parameters and integrated industrial IoT sensors to optimize production efficiency.
+            </p>
+            <div class="timeline-tags">
+              <span>PLC</span><span>SCADA</span><span>Industrial IoT</span><span>Power
+                Management</span><span>Manufacturing Automation</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="timeline-item reveal-up">
+        <div class="timeline-layout">
+          <div class="timeline-image-col">
+            <div class="timeline-img-wrap" data-cursor="img">
+              <img src="/AAI_intern.png" alt="Airports Authority of India — Intern" class="timeline-img"
+                loading="lazy" />
+            </div>
+          </div>
+          <div class="timeline-info-col">
+            <span class="timeline-num">02</span>
+            <h3 class="timeline-title">AIRPORTS AUTHORITY OF INDIA</h3>
+            <span class="timeline-role">Airport Operations & Communication Systems Intern</span>
+            <span class="timeline-date">June 2024 – July 2024</span>
+            <p class="timeline-desc">
+              Analyzed and observed civil aviation communication systems including VHF radio transmitters, radar
+              navigation aids (CNS), Doppler VHF Omnidirectional Range (DVOR), Instrument Landing Systems (ILS), and air
+              traffic control operation.
+            </p>
+            <div class="timeline-tags">
+              <span>VHF</span><span>DVOR</span><span>ILS</span><span>RADAR</span><span>CNS Systems</span><span>Air
+                Traffic Services</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== ACHIEVEMENT ARCHIVE ========== -->
+  <section class="section achievements" id="achievements">
+    <div class="section-number" aria-hidden="true">05</div>
+    <div class="section-header">
+      <h2 class="section-heading reveal-text">
+        <span>BUILT.</span>
+        <span>TESTED.</span>
+        <span>RECOGNIZED.</span>
+      </h2>
+    </div>
+
+    <div class="achievement-gallery" id="achievementGallery">
+      <div class="achievement-track">
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/i2mtc france.png" alt="IEEE IMS 2026 Nancy France" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2026</span>
+            <h4 class="achievement-event">IEEE IMS International Student Project Contest</h4>
+            <span class="achievement-result">3rd Place — Nancy, France</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/ieee_yesist12_runner.jpg" alt="IEEE YESIST12 Runner-Up" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2025</span>
+            <h4 class="achievement-event">IEEE YESIST12</h4>
+            <span class="achievement-result">International Runner-Up — Malaysia</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/vortex2.0.png" alt="Vortex 2.0 Winner" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2025</span>
+            <h4 class="achievement-event">Vortex 2.0</h4>
+            <span class="achievement-result">1st Place</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/dreamovation.png" alt="Dreamovation Runner-Up" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2025</span>
+            <h4 class="achievement-event">Dreamovation</h4>
+            <span class="achievement-result">Runner-Up</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/amphathon.png" alt="Ampathon Third Place" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2026</span>
+            <h4 class="achievement-event">Ampathon</h4>
+            <span class="achievement-result">3rd Place</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/cybershield.png" alt="CyberShield Runner-Up" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2025</span>
+            <h4 class="achievement-event">CyberShield</h4>
+            <span class="achievement-result">Runner-Up</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/botsha.jpg" alt="BOTSHA Second Place" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2024</span>
+            <h4 class="achievement-event">BOTSHA</h4>
+            <span class="achievement-result">2nd Place</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/cmr_thinkfest_2.0.jpg" alt="CMR ThinkFeast Top 6" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2024</span>
+            <h4 class="achievement-event">CMR ThinkFeast 2.0</h4>
+            <span class="achievement-result">Top 6</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/core_skill_contest.jpg" alt="Core Skill Contest Second Place" class="achievement-img"
+              loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2024</span>
+            <h4 class="achievement-event">Core Skill Contest</h4>
+            <span class="achievement-result">2nd Place</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/sih internal round.jpg" alt="SIH Internal Hackathon" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2024</span>
+            <h4 class="achievement-event">SIH Internal Hackathon</h4>
+            <span class="achievement-result">Winner</span>
+          </div>
+        </article>
+
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="pics/xypher'26.png" alt="Xypher'26" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2026</span>
+            <h4 class="achievement-event">Xypher'26</h4>
+            <span class="achievement-result">1st Place</span>
+          </div>
+        </article>
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="/iquest_3rdplace.jpg" alt="iQuest Third Place" class="achievement-img" loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2024</span>
+            <h4 class="achievement-event">iQuest</h4>
+            <span class="achievement-result">3rd Place</span>
+          </div>
+        </article>
+        <article class="achievement-card" data-cursor="img">
+          <div class="achievement-img-wrap">
+            <img src="pics/peri paper presentatin.png" alt="peri paper presentatin" class="achievement-img"
+              loading="lazy" />
+          </div>
+          <div class="achievement-info">
+            <span class="achievement-year">2026</span>
+            <h4 class="achievement-event">peri paper presentatin</h4>
+            <span class="achievement-result">Best Paper</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTERNATIONAL SPOTLIGHT — FRANCE ========== -->
+  <section class="section spotlight" id="spotlight-france">
+    <div class="spotlight-grid">
+      <div class="spotlight-text-col reveal-up">
+        <span class="spotlight-label">INTERNATIONAL STAGE</span>
+        <h2 class="spotlight-heading">
+          <span>FROM CHENNAI</span>
+          <span>TO NANCY.</span>
+        </h2>
+        <p class="spotlight-sub">IEEE IMS International Student Project Contest 2026</p>
+        <p class="spotlight-location">Nancy, France</p>
+        <div class="spotlight-achievement">
+          <span class="achievement-badge">3RD PLACE</span>
+          <span class="achievement-text">Global Finalist Selection</span>
+        </div>
+        <p class="spotlight-desc">
+          Represented the institution on the global stage, presenting the ATLAS subterranean localization architecture
+          to international delegates and judges, and securing a global podium finish.
+        </p>
+      </div>
+      <div class="spotlight-image-col reveal-up">
+        <div class="collage-france">
+          <div class="collage-item img-1" data-cursor="img">
+            <img src="/francepic/image.png" alt="Nancy France Presentation" loading="lazy" />
+          </div>
+          <div class="collage-item img-2" data-cursor="img">
+            <img src="/francepic/image copy.png" alt="Global Finalists Team" loading="lazy" />
+          </div>
+          <div class="collage-item img-3" data-cursor="img">
+            <img src="/francepic/image copy 2.png" alt="IEEE IMS Nancy Award Ceremony" loading="lazy" />
+          </div>
+          <div class="collage-item img-4" data-cursor="img">
+            <img src="/francepic/image copy 3.png" alt="Group Stage France" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTERNATIONAL SPOTLIGHT — MALAYSIA ========== -->
+  <section class="section spotlight spotlight-alt" id="spotlight-malaysia">
+    <div class="spotlight-grid spotlight-grid-reverse">
+      <div class="spotlight-image-col reveal-up">
+        <div class="collage-malaysia">
+          <div class="collage-item img-1" data-cursor="img">
+            <img src="/malaysia/image.png" alt="Malaysia Grand Finals Team" loading="lazy" />
+          </div>
+          <div class="collage-item img-2" data-cursor="img">
+            <img src="/malaysia/image copy.png" alt="Malaysia Event Presentation" loading="lazy" />
+          </div>
+          <div class="collage-item img-3" data-cursor="img">
+            <img src="/malaysia/image copy 2.png" alt="Malaysia Runner-Up Award" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <div class="spotlight-text-col reveal-up">
+        <span class="spotlight-label">GLOBAL RECOGNITION</span>
+        <h2 class="spotlight-heading">
+          <span>FROM CHENNAI</span>
+          <span>TO MALAYSIA.</span>
+        </h2>
+        <p class="spotlight-sub">IEEE YESIST12 Grand Finals 2025</p>
+        <p class="spotlight-location">Malaysia</p>
+        <div class="spotlight-achievement">
+          <span class="achievement-badge">RUNNER-UP</span>
+          <span class="achievement-text">International YESIST12 Finals</span>
+        </div>
+        <p class="spotlight-desc">
+          Presenting the ResqSense AIoT underground mine safety system at the international finals in Malaysia, earning
+          global recognition and runner-up honors.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LEADERSHIP ========== -->
+  <section class="section leadership" id="leadership">
+    <div class="section-number" aria-hidden="true">06</div>
+    <div class="section-header">
+      <h2 class="section-heading reveal-text">
+        <span>LEADING.</span>
+        <span>TEACHING.</span>
+        <span>BUILDING.</span>
+      </h2>
+    </div>
+
+    <div class="leadership-grid">
+      <article class="leadership-card reveal-up">
+        <div class="leadership-img-wrap">
+          <img src="/ieee_core.jpg" alt="IEEE Student Branch" class="leadership-img" loading="lazy" />
+        </div>
+        <h3 class="leadership-title">IEEE Student Branch</h3>
+        <span class="leadership-role">Vice President & Event Coordinator</span>
+        <p class="leadership-desc">Coordinated flagship events including ‘Mission Compassion’ and ‘IEEE Breadths’; led
+          IoT Hunt as part of Titanium 2026</p>
+      </article>
+
+      <article class="leadership-card reveal-up">
+        <div class="leadership-img-wrap">
+          <img src="/iot_lead.JPG" alt="Intellexa Club IoT Lead" class="leadership-img" loading="lazy" />
+        </div>
+        <h3 class="leadership-title">Intellexa Club</h3>
+        <span class="leadership-role">IoT Lead & Workshop Instructor</span>
+        <p class="leadership-desc">Conducted ‘IoT Connect’ and ‘Start Your IoT Journey’ workshops for 50+ students; led
+          IoT Olympics (Titanium 2026)</p>
+      </article>
+
+      <article class="leadership-card reveal-up">
+        <div class="leadership-img-wrap">
+          <img src="/vikram.png" alt="Team Vikram — Avionics & Telemetry" class="leadership-img" loading="lazy" />
+        </div>
+        <h3 class="leadership-title">Team Vikram</h3>
+        <span class="leadership-role">Avionics & Telemetry Engineer</span>
+        <p class="leadership-desc">Designed avionics and telemetry subsystems and custom ESP32 flight computer for model
+          rocket launch</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== SPORT ========== -->
+  <section class="section sport" id="sport">
+    <div class="sport-bg">
+      <img src="/hockey.png" alt="Hockey" class="sport-bg-img" loading="lazy" />
+      <div class="sport-overlay"></div>
+    </div>
+    <div class="sport-content">
+      <h2 class="section-heading section-heading-light reveal-text">
+        <span>BEYOND</span>
+        <span>ENGINEERING.</span>
+      </h2>
+      <div class="sport-details reveal-up">
+        <h3 class="sport-title">Anna University Zonal Hockey</h3>
+        <div class="sport-results">
+          <span>Runner-Up — 2023</span>
+          <span>Runner-Up — 2024</span>
+          <span>Runner-Up — 2025</span>
+        </div>
+      </div>
+      <div class="sport-images reveal-up">
+        <img src="/hockey_team.jpg" alt="Hockey Team" class="sport-thumb" loading="lazy" />
+        <img src="/hockey_zonals_runner.jpg" alt="Hockey Zonals Runner-Up" class="sport-thumb" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section contact" id="contact">
+    <div class="contact-bg">
+      <video class="contact-video" muted loop playsinline preload="none" poster="/supporting section backgrounds.png">
+        <source src="/main hero background video.mp4" type="video/mp4" />
+      </video>
+      <div class="contact-overlay"></div>
+    </div>
+
+    <div class="contact-content">
+      <h2 class="section-heading section-heading-light reveal-text">
+        <span>HAVE AN IDEA</span>
+        <span>THAT NEEDS</span>
+        <span>TO EXIST?</span>
+      </h2>
+      <p class="contact-sub reveal-up">LET'S BUILD IT.</p>
+
+      <div class="contact-links reveal-up">
+        <a href="mailto:faisal.offl123@gmail.com" class="contact-link" data-cursor="link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ahamed-faisal-57a069294/" class="contact-link" data-cursor="link"
+          target="_blank" rel="noopener">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://github.com/ahamedfaisal-dot" class="contact-link" data-cursor="link" target="_blank"
+          rel="noopener">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="#" class="contact-link" data-cursor="link">
+          <span class="contact-link-label">Resume</span>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>© 2026 Ahamed Faisal A.</span>
+      <span>Electronics × Intelligence</span>
     </footer>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 3D Background Animation ---
-            let scene, camera, renderer, particles;
-            function initBackground() {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
-                camera.position.z = 1000;
-
-                const geometry = new THREE.BufferGeometry();
-                const vertices = [];
-                const sprite = new THREE.TextureLoader().load('https://threejs.org/examples/textures/sprites/disc.png');
-
-                for (let i = 0; i < 5000; i++) {
-                    const x = 2000 * Math.random() - 1000;
-                    const y = 2000 * Math.random() - 1000;
-                    const z = 2000 * Math.random() - 1000;
-                    vertices.push(x, y, z);
-                }
-                geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-                
-                const initialColor = getComputedStyle(document.documentElement).getPropertyValue('--particle-color');
-                const material = new THREE.PointsMaterial({
-                    size: 5, sizeAttenuation: true, map: sprite, alphaTest: 0.5,
-                    transparent: true, color: new THREE.Color(initialColor.trim())
-                });
-                
-                particles = new THREE.Points(geometry, material);
-                scene.add(particles);
-
-                renderer = new THREE.WebGLRenderer({canvas: document.getElementById('bg-canvas'), alpha: true});
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                
-                window.addEventListener('resize', onWindowResize);
-            }
-
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-            
-            function animateBackground() {
-                requestAnimationFrame(animateBackground);
-                const time = Date.now() * 0.0001;
-                particles.rotation.x = time * 0.2;
-                particles.rotation.y = time * 0.4;
-                renderer.render(scene, camera);
-            }
-
-            // --- Theme Toggling ---
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
-            
-            const applyTheme = (theme) => {
-                body.className = theme;
-                themeToggle.innerHTML = theme === 'theme-dark' 
-                    ? '<i class="fas fa-sun text-yellow-400 text-xl"></i>' 
-                    : '<i class="fas fa-moon text-indigo-600 text-xl"></i>';
-                
-                setTimeout(() => {
-                    if (particles) {
-                        const newColor = getComputedStyle(document.documentElement).getPropertyValue('--particle-color');
-                        particles.material.color.set(new THREE.Color(newColor.trim()));
-                    }
-                }, 10);
-            };
-            
-            themeToggle.addEventListener('click', () => {
-                const newTheme = body.classList.contains('theme-dark') ? 'theme-light' : 'theme-dark';
-                applyTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
-            
-            // --- Mobile Menu ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenuClose = document.getElementById('mobile-menu-close');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
-            mobileMenuClose.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-
-            // --- Scroll Animations ---
-            ScrollReveal().reveal('.reveal-fade', { delay: 200, duration: 1000, distance: '0px', opacity: 0, easing: 'cubic-bezier(0.5, 0, 0, 1)' });
-            ScrollReveal().reveal('.reveal-up', { delay: 300, duration: 1000, distance: '60px', origin: 'bottom', interval: 150, easing: 'cubic-bezier(0.5, 0, 0, 1)' });
-
-            // --- Active Nav Link Highlighting ---
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('#desktop-menu a');
-            
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 150) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-                
-                const timelineItems = document.querySelectorAll('.timeline-item');
-                timelineItems.forEach(item => {
-                    const itemTop = item.getBoundingClientRect().top;
-                    if(itemTop < window.innerHeight * 0.75 && itemTop > 0) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            });
-
-            // --- Initial Load ---
-            const savedTheme = localStorage.getItem('theme') || 'theme-dark';
-            applyTheme(savedTheme);
-            initBackground();
-            animateBackground();
-
-            // --- Contact Form Handling ---
-            const contactForm = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoading = document.getElementById('btn-loading');
-            const formMessages = document.getElementById('form-messages');
-
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Show loading state
-                btnText.classList.add('hidden');
-                btnLoading.classList.remove('hidden');
-                submitBtn.disabled = true;
-                
-                // Get form data
-                const formData = new FormData(contactForm);
-                const name = formData.get('name');
-                const mobile = formData.get('mobile');
-                const message = formData.get('message');
-                
-                try {
-                    // Send email using EmailJS (you'll need to configure this)
-                    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: name,
-                            mobile: mobile,
-                            message: message,
-                            _replyto: 'faisal.offl123@gmail.com'
-                        })
-                    });
-                    
-                    if (response.ok) {
-                        showMessage('Thank you! Your message has been sent successfully. I will get back to you soon.', 'success');
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Failed to send message');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    showMessage('Sorry, there was an error sending your message. Please try again or contact me directly at faisal.offl123@gmail.com', 'error');
-                }
-                
-                // Reset button state
-                btnText.classList.remove('hidden');
-                btnLoading.classList.add('hidden');
-                submitBtn.disabled = false;
-            });
-            
-            function showMessage(message, type) {
-                const messageClass = type === 'success' 
-                    ? 'bg-green-100 border-green-400 text-green-700' 
-                    : 'bg-red-100 border-red-400 text-red-700';
-                    
-                formMessages.innerHTML = `
-                    <div class="border px-4 py-3 rounded relative ${messageClass}" role="alert">
-                        <span class="block sm:inline">${message}</span>
-                    </div>
-                `;
-                
-                // Auto-hide message after 5 seconds
-                setTimeout(() => {
-                    formMessages.innerHTML = '';
-                }, 5000);
-            }
-        });
-    </script>
-
-    <!-- Add EmailJS SDK -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        // Initialize EmailJS (you'll need to get your own keys from https://www.emailjs.com/)
-        (function(){
-            emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
-        })();
-        
-        // Alternative email sending function using EmailJS
-        async function sendEmailWithEmailJS(name, mobile, message) {
-            const templateParams = {
-                from_name: name,
-                from_mobile: mobile,
-                message: message,
-                to_email: 'faisal.offl123@gmail.com'
-            };
-            
-            try {
-                const response = await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
-                return response;
-            } catch (error) {
-                throw error;
-            }
-        }
-    </script>
+  <script type="module" src="/main.js"></script>
 </body>
-</html>
 
+</html>
